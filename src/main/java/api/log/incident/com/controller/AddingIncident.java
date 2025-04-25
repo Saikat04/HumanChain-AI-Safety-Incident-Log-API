@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import api.log.incident.com.entity.Incidents;
 import api.log.incident.com.services.impl.IncidentServiceImpl;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,8 @@ public class AddingIncident {
     IncidentServiceImpl incidentServiceImpl;
     
     @RequestMapping(value = "/addIncidents", method=RequestMethod.POST)
-    public String requestMethodName(@RequestBody Incidents incident) {
+    public String requestMethodName(@Valid @RequestBody Incidents incident) {
         Incidents i = incidentServiceImpl.createIncident(incident);
-        System.out.println(i.getIncidentId()+" "+i.getIncidentCreatedAt());
         return "Incident Created Successfully with ID: " + i.getIncidentId();
     }
     /*

@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,15 +33,15 @@ public class Incidents {
     @Column(name = "IncidentID", nullable = false, unique = true)
     private Long incidentId;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "IncidentTitle", nullable = false, columnDefinition = "TEXT")
     private String incidentTitle;
 
-    @NotNull
+    @NotEmpty(message = "Incident Description cannot be empty")
     @Column(name = "IncidentDescription", nullable = false, columnDefinition = "TEXT")
     private String incidentDescription;
 
-    @NotNull
+    @NotNull(message = "Incident Severity cannot be null")
     @Enumerated(EnumType.STRING) 
     @Column(name = "IncidentSeverity", nullable = false)       
     private Severity incidentSeverity;
