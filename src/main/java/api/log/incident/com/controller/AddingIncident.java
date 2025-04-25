@@ -1,6 +1,9 @@
 package api.log.incident.com.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.log.incident.com.entity.Incidents;
@@ -19,9 +22,9 @@ public class AddingIncident {
     IncidentServiceImpl incidentServiceImpl;
     
     @RequestMapping(value = "/addIncidents", method=RequestMethod.POST)
-    public String requestMethodName(@Valid @RequestBody Incidents incident) {
+    public ResponseEntity<Map<String, String>> requestMethodName(@Valid @RequestBody Incidents incident) {
         Incidents i = incidentServiceImpl.createIncident(incident);
-        return "Incident Created Successfully with ID: " + i.getIncidentId();
+        return ResponseEntity.ok(Map.of("message", "Incident with ID: " + i.getIncidentId() + " added successfully."));
     }
     /*
      {

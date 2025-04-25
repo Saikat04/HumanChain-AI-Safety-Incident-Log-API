@@ -1,6 +1,9 @@
 package api.log.incident.com.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,8 +18,8 @@ public class DeleteIncident {
     IncidentServiceImpl incidentServiceImpl;
     
     @RequestMapping(value = "/deleteIncident/{id}", method=RequestMethod.DELETE)
-    public String deleteIncident(@PathVariable("id") Long id) {
+    public ResponseEntity<Map<String, String>> deleteIncident(@PathVariable("id") Long id) {
         incidentServiceImpl.deleteIncident(id);
-        return "Incident with ID: " + id + " deleted successfully.";
+        return ResponseEntity.ok(Map.of("message", "Incident with ID: " + id + " deleted successfully."));
     }
 }
